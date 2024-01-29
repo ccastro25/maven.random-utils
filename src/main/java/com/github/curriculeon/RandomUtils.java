@@ -11,64 +11,94 @@ import java.util.Random;
 public final class RandomUtils {
     private static volatile Random random = new Random();
 
+    public static void main(String[] args){
+
+    }
     private RandomUtils() {
         /** This class is uninstantiable */
     }
+
 
     /**
      * @return true with the likelihood of specified percentage
      */
     public static Boolean createBoolean(float percentage) {
-        return null;
+
+        return percentage > 33.2 ? true : false;
     }
 
     /**
      * @return a random character between the specified min and max character range
      */
     public static Character createCharacter(char min, char max) {
-        return null;
+        String st = "abcdefghijklmnopqrstuvwxyz";
+        String newSt = st.substring(st.indexOf(min),st.indexOf(max));
+        char result  = newSt.charAt(random.nextInt(newSt.length()));
+
+        return result;
     }
 
     /**
      * @return a random double between the specified min and max numeric range
      */
-    public static Float createFloat(float min, float max) {
-        return null;
+    public static Float createFloat(float min, float max)
+    {
+
+        return min + random.nextFloat() * (max - min);
     }
 
     /**
      * @return a random float between the specified min and max numeric range
      */
     public static Double createDouble(double min, double max) {
-        return null;
+        return random.nextDouble() *(max-min) + min;
     }
 
     /**
      * @return a random integer between the specified min and max numeric range
      */
     public static Integer createInteger(int min, int max) {
-        return null;
+
+        return random.nextInt(max + 1 - min) + min;
     }
 
     /**
      * @return a random long between the specified min and max numeric range
      */
     public static Long createLong(long min, long max) {
-        return null;
+
+        return (long) (random.nextDouble() *(max-min) + min);
     }
 
     /**
      * @return a random string of the specified length containing characters in the specified range
      */
-    public static String createString(char min, char max, int stringLength) {
-        return null;
+    public static String createString(char min, char max, int stringLength)
+    {
+        String st = "abcdefghijklmnopqrstuvwxyz";
+        String newSt = st.substring(st.indexOf(min),st.indexOf(max));
+
+        String chars ="";
+        for(int i =0; i< stringLength;i++){
+          chars += newSt.charAt(random.nextInt(newSt.length()));
+
+        }
+
+        return chars;
     }
 
     /**
      * @return an array of random string objects of the specified length containing characters in the specified range
      */
     public static String[] createStrings(char min, char max, int stringLength, int stringCount) {
-        return null;
+
+
+        String[] newString = new String[stringCount];
+        for(int i=0; i<stringCount;i++){
+            newString[i]=createString(min,max,stringLength);
+
+        }
+        return newString;
     }
 
     /**
@@ -85,8 +115,12 @@ public final class RandomUtils {
      * @param maxDate minimum Date to be returned
      * @return random date between the specified `minDate` and `maxDate`
      */
-    public static Date createDate(Date minDate, Date maxDate) {
-        return null;
+    public static Date createDate(Date minDate, Date maxDate)
+    {
+
+        long date = createLong(minDate.getTime(),maxDate.getTime());
+
+        return new Date(date);
     }
 
     /**
@@ -95,7 +129,7 @@ public final class RandomUtils {
      * @return a randomly selected element from the specified array
      */
     public static <AnyType> AnyType selectElement(AnyType[] array) {
-        return null;
+        return array[random.nextInt(array.length)];
     }
 
     /**
@@ -104,7 +138,7 @@ public final class RandomUtils {
      * @return a randomly selected element from the specified array
      */
     public static <AnyType> AnyType selectElement(List<AnyType> list) {
-        return null;
+        return list.get(random.nextInt(list.size()));
     }
 
     /**
